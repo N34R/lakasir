@@ -6,8 +6,9 @@ Lakasir is a free, open source and online Point Of Sale Software designed for sm
 
 ## Requirements
 
-* PHP 7.4 or higher
-* Database (eg: MySQL, PostgresSql)
+* PHP 7.4 or higher and set php.ini `max_execution_time = 300`
+* Composer 2 has failure for some package
+* Database (eg: MySQL `5.7.8`, PostgresSql)
 * Web Server (eg: Nginx)
 * Other Libraries: development
 
@@ -19,9 +20,9 @@ Lakasir uses [Laravel](http://laravel.com), the best existing PHP framework, as 
 ## Installation
 
 * Install [Composer](https://getcomposer.org/download) and [Npm](https://nodejs.org/en/download)
-* Clone the repository: `git clone https://github.com/lakasir/lakasir.git`
-* Or use `composer create-project lakasir/lakasir your-project-name` 
-* access the local domain `localhost/install`
+* Clone the repository: `git clone https://github.com/n34r/lakasir.git`
+* Or use `composer create-project lakasir/lakasir your-project-name`  -> this package not yet worked
+* access the local domain `localhost/` or `localhost/install?tab=database`
 * fill in several needs such as database and account
 * go to terminal and run `php artisan migrate; php artisan passport:install;`
 * Install dependencies: `npm install ; npm run dev`
@@ -49,3 +50,6 @@ Support Lakasir to becoming a sponsor on [Github](https://github.com/lakasir), Y
 
 ## License
 Lakasir is licensed under [MIT License](https://github.com/lakasir/lakasir/blob/master/LICENSE) which means it's completely free.
+
+## And I not the author of this project
+Try to solve the problem on this project
