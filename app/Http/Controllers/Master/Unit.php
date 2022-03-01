@@ -8,11 +8,11 @@ use App\Http\Requests\Master\Unit\Index;
 use App\Http\Requests\Master\Unit\Store;
 use App\Http\Requests\Master\Unit\Update;
 use App\Repositories\Unit as UnitRepository;
-use Sheenazien8\Hascrudactions\Traits\HasCrudAction;
+use App\Traits\HasCrudActions;
 
 class Unit extends Controller
 {
-    use HasCrudAction;
+    use HasCrudActions;
 
     protected $viewPath = 'app.master.units';
 
@@ -26,7 +26,7 @@ class Unit extends Controller
 
     protected $bulkDestroyRequest = BulkDelete::class;
 
-    protected $resources = 'unit';
+    protected $redirect = '/master/unit';
 
     protected $repositoryClass = UnitRepository::class;
 }

@@ -2,29 +2,22 @@
 
 namespace App\Repositories;
 
+use App\Abstracts\Repository as RepositoryAbstract;
 use Illuminate\Http\Request;
 use App\Models\User as UserModel;
 use Illuminate\Support\Facades\DB;
-use Sheenazien8\Hascrudactions\Abstracts\Repository as AbstractsRepository;
 use Spatie\Permission\Models\Role;
 
-class User extends AbstractsRepository
+class User extends RepositoryAbstract
 {
-    /**
-     * @param
-     */
-    public function __construct()
-    {
-        parent::__construct(new UserModel());
-    }
-
+    protected string $model = UserModel::class;
 
     /**
      * @var string
      */
     private string $role = 'employee';
 
-    public function create(Request $request): UserModel
+    public function create(Request $request)
     {
         $self = $this;
         return DB::transaction(static function () use ($request, $self) {
@@ -46,7 +39,7 @@ class User extends AbstractsRepository
         });
     }
 
-    public function update(Request $request, $user): UserModel
+    public function update(Request $request, $user)
     {
         $self = $this;
         return DB::transaction(static function () use ($request, $self, $user) {

@@ -9,6 +9,7 @@ use App\Http\Requests\Master\PaymentMethod\Store;
 use App\Http\Requests\Master\PaymentMethod\Index;
 use App\Repositories\PaymentMethod as PaymentMethodRepository;
 use App\Traits\HasCrudActions;
+use Illuminate\Http\Request;
 
 class PaymentMethod extends Controller
 {

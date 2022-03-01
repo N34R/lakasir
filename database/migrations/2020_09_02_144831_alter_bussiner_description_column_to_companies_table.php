@@ -13,6 +13,13 @@ class AlterBussinerDescriptionColumnToCompaniesTable extends Migration
      */
     public function up()
     {
+        Schema::table('companies', function (Blueprint $table) {
+            $table->dropColumn('business_description');
+        });
+
+        Schema::table('companies', function (Blueprint $table) {
+            $table->text('business_description')->after('business_type')->nullable();
+        });
     }
 
     /**
@@ -22,5 +29,12 @@ class AlterBussinerDescriptionColumnToCompaniesTable extends Migration
      */
     public function down()
     {
+        Schema::table('companies', function (Blueprint $table) {
+            $table->dropColumn('business_description');
+        });
+
+        Schema::table('companies', function (Blueprint $table) {
+            $table->text('business_description')->after('business_type');
+        });
     }
 }

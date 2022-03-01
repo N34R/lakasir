@@ -2,6 +2,9 @@
 
 namespace App\Helpers;
 
+use Illuminate\Database\Eloquent;
+use Illuminate\Support\Collection;
+
 class NumberGenerator
 {
     /**
@@ -38,7 +41,7 @@ class NumberGenerator
         $number = $prefix . now()->format('ymd');
         $lastInsert = $this->model::latest()->first();
         $increments = str_pad(($lastInsert->id ?? 1), 4, "0", STR_PAD_LEFT);
-        $format = $number . $increments;
+        $format = $number.$increments;
         return $format;
     }
 }

@@ -2,56 +2,60 @@
 
 use App\Models\Media;
 use App\Models\Setting;
-use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
-if (!function_exists('action')) {
+if (! function_exists('action')) {
     function action(array $action)
     {
     }
 }
 
-if (!function_exists('dash_to_space')) {
+if (! function_exists('dash_to_space')) {
     function dash_to_space(string $string, bool $capital = false)
     {
-        $name = str_replace(['-', '_'], [' ', ' '], $string);
+        $name = str_replace('-', ' ', $string);
+        $name = str_replace('_', ' ', $name);
 
         return $capital ? Str::upper($name) : $name;
     }
 }
-if (!function_exists('price_format')) {
+if (! function_exists('price_format')) {
     function price_format($price)
     {
-        return 'Rp. ' . number_format($price, 0, ',', '.');
+        return 'Rp. '.number_format($price, 0, ',', '.');
     }
 }
-if (!function_exists('get_lang')) {
+if (! function_exists('get_lang')) {
     function get_lang()
     {
         app()->setLocale(optional(auth()->user() ?? 'en')->localization);
     }
 }
-if (!function_exists('media')) {
+if (! function_exists('media')) {
     function media(Media $media = null)
     {
         return url($media->getFullName ?? '');
     }
 }
-if (!function_exists('medias')) {
+if (! function_exists('medias')) {
     function medias(Collection $media)
     {
         dd($media);
     }
 }
 
-if (!function_exists('checkValueArray')) {
+if (! function_exists('checkValueArray')) {
     function array_must_same(array $array, array $key, $expectedValue): bool
     {
-        $count = count($key);
+        for ($i = 0; $i < count($key); $i++) {
+            if (isset($array[$key[$i]])) {
+                $val = $array[$key[$i]];
+                if ($val != $expectedValue) {
+                    return false;
+                }
 
-        for ($i = 0; $i < $count; $i++) {
-            if (!isset($array[$key[$i]]) || $array[$key[$i]] != $expectedValue) {
+            } else {
                 return false;
             }
         }
@@ -60,39 +64,51 @@ if (!function_exists('checkValueArray')) {
     }
 }
 
-if (!function_exists('percentage')) {
+if (! function_exists('percentage')) {
     function percentage(int $percentage): string
     {
         return $percentage . '%';
     }
 }
 
-if (!function_exists('get_month')) {
+if (! function_exists('get_month')) {
     function get_month($length = null, $withKey = false): array
     {
         $month = [];
-
+        $i = 1;
         for($m=1; $m<=12; ++$m){
-            $date = date('F', mktime(0, 0, 0, $m, 1));
-            $name = $length ? substr($date, 0, $length) : $date;
-
-            $month[] = $withKey
-                ? [
-                    'month_name' => $name,
-                    'month_key' => $m,
-                ]
-                : $name;
+            $i;
+            if ($length) {
+                if ($withKey) {
+                    $month[] = [
+                        'month_name' => substr(date('F', mktime(0, 0, 0, $m, 1)), 0, $length),
+                        'month_key' => $i++,
+                        'value' => null
+                    ];
+                } else {
+                    $month[] = substr(date('F', mktime(0, 0, 0, $m, 1)), 0, $length);
+                }
+            } else {
+                if ($withKey) {
+                    $month[] = [
+                        'month_name' => date('F', mktime(0, 0, 0, $m, 1)),
+                        'month_key' => $i++,
+                    ];
+                } else {
+                    $month[] = date('F', mktime(0, 0, 0, $m, 1));
+                }
+            }
         }
 
         return $month;
     }
 }
 
-if (!function_exists('get_wrapper_month')) {
+if (! function_exists('get_wrapper_month')) {
     function get_wrapper_month(): array
     {
         $wrapp = [];
-        for ($i = 0; $i <= 12; $i++) {
+        for ($i = 0; $i <=12; $i++) {
             $wrapp[$i] = null;
         }
 
@@ -100,16 +116,9 @@ if (!function_exists('get_wrapper_month')) {
     }
 }
 
-if (!function_exists('setting')) {
+if (! function_exists('setting')) {
     function setting(string $key)
     {
         return optional(Setting::where('key', $key)->first())->value;
-    }
-}
-
-if (!function_exists('getProfileImage')) {
-    function getProfileImage()
-    {
-        return (new User)->adminlte_image();
     }
 }

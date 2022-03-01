@@ -11,10 +11,8 @@ use App\Repositories\PaymentMethod;
 use App\Repositories\Selling;
 use App\Repositories\SellingDetail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Lakasir\UserLoggingActivity\Facades\Activity;
-
 
 /**
  * Service For Complect Logic which related with Selling
@@ -132,6 +130,7 @@ class SellingService
                             ->when($request->search, function ($query) use ($request) {
                                 return $query->where('name', 'LIKE', $request->search.'%') ;
                             })
+                            ->latest()
                             ->get()->map(function ($item) {
                                 return [
                                     'id' => $item->id,
@@ -144,12 +143,7 @@ class SellingService
                                 ];
                             });
 
-        $sorted = array_values(Arr::sort($items->toArray(), function ($value) {
-            return $value['selling_price'];
-        }));
-        $sortedDesc = collect($sorted)->sortByDesc('selling_price')->toArray();
-
-        return array_values($sortedDesc);
+        return $items->toArray();
     }
 
     /**

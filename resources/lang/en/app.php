@@ -94,13 +94,10 @@ return [
             'password' => 'Type your passwords'
         ],
         'label' => [
-            'remember' => 'Remeber Me',
-            'identity' => 'Email or Username',
-            'password' => 'Passwords'
+            'remember' => 'Remeber Me'
         ],
         'login' => 'Login',
-        'forgot_password' => 'Forgot Password',
-        'unauthorized' => 'This action is unauthorized.'
+        'forgot_password' => 'Forgot Password'
     ],
     'items' => [
         'title' => 'Item Data',
@@ -302,7 +299,7 @@ return [
         ],
     ],
     'customers' => [
-        'title' => 'Customer',
+        'title' => 'Title',
         'column' => [
             'name' => 'Name',
             'email' => 'Email',
@@ -360,7 +357,7 @@ return [
         ],
     ],
     'categories' => [
-        'title' => 'Categories',
+        'title' => 'Unit',
         'column' => [
             'name' => 'Name',
         ],

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\Role;
+use App\Repositories\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;

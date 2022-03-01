@@ -15,7 +15,6 @@ class CreatePricesTable extends Migration
     {
         Schema::create('prices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->double('initial_price');
             $table->double('selling_price');
             $table->date('date');

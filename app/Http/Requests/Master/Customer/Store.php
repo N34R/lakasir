@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Master\Customer;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class Store extends FormRequest
 {

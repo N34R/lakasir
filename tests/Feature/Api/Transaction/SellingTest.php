@@ -10,6 +10,8 @@ use App\Models\Selling;
 use App\Models\SellingDetail;
 use App\Repositories\Item as ItemRepository;
 use App\Traits\SetClietnCredentials;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -19,8 +21,24 @@ class SellingTest extends TestCase
 {
     use SetClietnCredentials;
 
-    /** @var int */
+    /**
+     * @var int
+     */
     private $money;
+
+    /**
+     * @var Item
+     */
+    /* private $item; */
+
+    /**
+     * @param Item $item
+     */
+    /* public function __construct() */
+    /* { */
+    /*     $this->item = new ItemRepository(); */
+    /* } */
+
 
     public function test_selling_list_item_success($search = null): void
     {
@@ -31,12 +49,12 @@ class SellingTest extends TestCase
         ]), $this->oauth_headers);
 
         $response->assertStatus(200)
-            ->assertJsonStructure([
-                'success',
-                'payload' => [
-                    ['id', 'name', 'image', 'stock', 'selling_price']
-                ]
-            ]);
+                 ->assertJsonStructure([
+                     'success',
+                     'payload' => [
+                         ['id', 'name', 'image', 'stock', 'selling_price']
+                     ]
+                 ]);
     }
 
     public function test_error_422_selling_items(): void
@@ -166,7 +184,7 @@ class SellingTest extends TestCase
     {
         $money = 0;
         $items = Item::inRandomOrder()->has('log_stocks')->take(3)->get();
-        $items = $items->map(function ($el) use (&$money) {
+        $items = $items->map(function($el) use(&$money) {
             if ($el->last_price) {
                 $stock = 2;
                 $money = $money + ($el->last_price->selling_price * $stock);

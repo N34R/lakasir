@@ -13,11 +13,12 @@ class Stock extends Model
 
     public function item()
     {
-        return $this->belongsTo(Item::class, 'item_id');
+        return $this->belongsTo(Unit::class, 'item_id');
     }
 
     public function price()
     {
         return $this->belongsTo(Price::class, 'price_id');
     }
+
 }

@@ -13,7 +13,10 @@ class AlterUserIdInCompaniesTable extends Migration
      */
     public function up()
     {
-        Schema::table('companies', function (Blueprint $table) {
+        Schema::table('companies', function (Blueprint $table)
+        {
+            $table->dropForeign([ 'user_id' ]);
+            $table->dropColumn('user_id');
         });
     }
 
@@ -24,7 +27,9 @@ class AlterUserIdInCompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::table('companies', function (Blueprint $table) {
+        Schema::table('companies', function (Blueprint $table)
+        {
+            $table->foreignId('user_id')->references('id')->on('users')->after('reg_number');
         });
     }
 }

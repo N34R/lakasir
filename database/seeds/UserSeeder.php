@@ -13,10 +13,8 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        if (app()->environment() != 'testing') {
-            DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-            User::truncate();
-        }
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        User::truncate();
         factory(User::class)->create([
             'email' => 'admin@lakasir.deb',
             'username' => 'admin'

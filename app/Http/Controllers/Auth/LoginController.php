@@ -8,7 +8,6 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
-/** @package App\Http\Controllers\Auth */
 class LoginController extends Controller
 {
     /*
@@ -109,7 +108,8 @@ class LoginController extends Controller
         ];
 
         $request->validate([
-            'identity' => ['required', 'string', function ($attr, $val, $fail) {
+            'identity' => ['required', 'string', function ($attr, $val, $fail)
+            {
                 $user = User::where($this->username(), $val)->first();
                 if (!$user) {
                     $fail(trans('auth.failed'));

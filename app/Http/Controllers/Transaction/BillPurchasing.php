@@ -48,4 +48,5 @@ class BillPurchasing extends Controller
             'spending' => $this->repository->card()
         ]);
     }
+
 }

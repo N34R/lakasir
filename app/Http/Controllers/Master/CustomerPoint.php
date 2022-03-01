@@ -28,7 +28,6 @@ class CustomerPoint extends Controller
      */
     public function store(): RedirectResponse
     {
-        $this->create();
         get_lang();
 
         $request = resolve($this->storeRequest);

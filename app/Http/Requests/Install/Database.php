@@ -27,7 +27,7 @@ class Database extends FormRequest
             'host' => ['required', 'ip'],
             'name' => ['required', 'alpha_dash'],
             'username' => ['required', 'alpha_dash'],
-            'password' => ['required'],
+            'password' => [''],
         ];
     }
 }

@@ -20,9 +20,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        if (app()->environment() != 'testing') {
-            DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        }
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Selling::truncate();
         SellingDetail::truncate();
         Purchasing::truncate();
@@ -35,8 +33,8 @@ class DatabaseSeeder extends Seeder
             /* UserSeeder::class, */
             RolesAndPermissionsSeeder::class,
             PaymentMethod::class,
+            UnitSeeder::class,
             CategorySeeder::class,
-            UserSeeder::class,
         ]);
     }
 }
